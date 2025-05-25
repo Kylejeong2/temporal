@@ -17,8 +17,7 @@ export async function digitalResearchWorkflow(task: ResearchTask): Promise<strin
   
   const { 
     searchGoogle,
-    generateReport,
-    simulateNetworkFailure 
+    generateReport
   } = proxyActivities<typeof researchActivities>({
     retry: {
       initialInterval: '2 seconds',
@@ -46,9 +45,7 @@ export async function digitalResearchWorkflow(task: ResearchTask): Promise<strin
       console.log('='.repeat(30));
       console.log(`🔍 About to search Google for: "${task.topic}"`);
       console.log(`🔄 Retry policy: max 5 attempts, 2s-60s intervals`);
-      
-      console.log('🎲 Running network failure simulation...');
-      await simulateNetworkFailure(0.4); // 40% chance of failure
+      console.log(`🎲 40% failure simulation enabled in search activity`);
       
       console.log('🚀 Calling searchGoogle activity...');
       const searchResults = await searchGoogle(task.topic);
@@ -74,9 +71,7 @@ export async function digitalResearchWorkflow(task: ResearchTask): Promise<strin
       console.log('='.repeat(30));
       console.log(`📝 About to generate report for: "${task.topic}"`);
       console.log(`📊 Using ${progress.searchResults.length} search results`);
-      
-      console.log('🎲 Running network failure simulation...');
-      await simulateNetworkFailure(0.3); // 30% chance of failure
+      console.log(`🎲 30% failure simulation enabled in report activity`);
       
       console.log('🚀 Calling generateReport activity...');
       const reportPath = await generateReport(task.topic, progress.searchResults);

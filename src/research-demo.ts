@@ -142,6 +142,14 @@ async function main() {
         await runResearchDemo(customTopic);
       }
       break;
+    case 'custom':
+      if (customTopic) {
+        await runResearchDemo(customTopic);
+      } else {
+        console.log('❌ Please provide a topic for custom research');
+        console.log('Example: npm run research-demo custom "AI trends"');
+      }
+      break;
     case 'stress':
       await runStressTest();
       break;

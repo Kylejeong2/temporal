@@ -76,6 +76,10 @@ export async function searchGoogle(topic: string): Promise<SearchResult[]> {
   console.log(`\n🚀 Starting searchGoogle function [${searchId}]`);
   console.log(`📝 Search topic: "${topic}" [${searchId}]`);
   
+  // Simulate failure at the start of the actual work
+  console.log('🎲 Running search failure simulation (40% chance)...');
+  await simulateNetworkFailure(0.4);
+  
   let stagehand: Stagehand | null = null;
   
   try {
@@ -218,6 +222,10 @@ export async function generateReport(topic: string, results: SearchResult[]): Pr
   console.log('\n📝 Starting generateReport function');
   console.log(`📝 Report topic: "${topic}"`);
   console.log(`📊 Number of results to include: ${results.length}`);
+  
+  // Simulate failure at the start of the actual work
+  console.log('🎲 Running report failure simulation (30% chance)...');
+  await simulateNetworkFailure(0.3);
   
   // Create report content
   const reportContent = [
